@@ -1,3 +1,10 @@
+
+
+'use client'
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import React, { useState, useMemo, useCallback } from 'react';
 import {
   Box,
@@ -6,7 +13,6 @@ import {
   TextField,
   Button,
   Paper,
-  Grid,
   Table,
   TableBody,
   TableCell,
@@ -23,6 +29,7 @@ import {
   Stack,
   alpha
 } from '@mui/material';
+import Grid from '@mui/material/Grid';
 import {
   Add as AddIcon,
   Refresh as RefreshIcon,
@@ -107,7 +114,7 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
 }));
 
 interface GradientButtonProps {
-  variant?: 'primary' | 'success';
+  variant?: 'primary' | 'success' | string;
 }
 
 const GradientButton = styled(Button, {
@@ -249,8 +256,8 @@ const MatrixTable: React.FC<MatrixTableProps> = React.memo(({
 
 MatrixTable.displayName = 'MatrixTable';
 
-// ====================== Input Controls Component ======================
-const InputControls: React.FC<InputControlsProps> = React.memo(({ 
+
+const InputControls: React.FC<InputControlsProps> = React.memo(function InputControls({ 
   rows, 
   columns, 
   onRowsChange, 
@@ -259,7 +266,7 @@ const InputControls: React.FC<InputControlsProps> = React.memo(({
   onReset, 
   hasMatrices, 
   loading 
-}) => {
+}) {
   return (
     <StyledPaper>
       <Typography variant="h5" component="h2" gutterBottom color="primary.main" fontWeight="bold">
@@ -325,8 +332,15 @@ const InputControls: React.FC<InputControlsProps> = React.memo(({
     </StyledPaper>
   );
 });
+InputControls.displayName = 'InputControls'
 
-InputControls.displayName = 'InputControls';
+
+
+
+
+
+
+
 
 // ====================== Instructions Component ======================
 const Instructions = React.memo(() => (
@@ -435,7 +449,7 @@ const MatrixCalculator: React.FC = () => {
       
       setMatrices(newMatrices);
       setResultMatrix(null);
-    } catch (err) {
+    } catch {
       setError('Failed to generate matrices. Please try again.');
     } finally {
       setLoading(false);
@@ -470,7 +484,7 @@ const MatrixCalculator: React.FC = () => {
 
       setResultMatrix(result);
       setError('');
-    } catch (err) {
+    } catch  {
       setError('Failed to add matrices. Please try again.');
     }
   }, [matrices]);
@@ -503,7 +517,7 @@ const MatrixCalculator: React.FC = () => {
               WebkitTextFillColor: 'transparent',
             }}
           >
-            Advanced Matrix Calculator
+             Matrix Calculator
           </Typography>
           <Typography variant="h6" color="text.secondary" sx={{ mb: 2 }}>
             This Single Page Application is build by Ajmot at Webskitters Academy
@@ -609,3 +623,6 @@ const MatrixCalculator: React.FC = () => {
 };
 
 export default MatrixCalculator;
+
+
+
